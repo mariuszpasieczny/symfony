@@ -1,0 +1,8 @@
+services:
+    app.product.catalog.manager:
+        class: Sonata\ProductBundle\Entity\ProductManager
+        arguments: [ Application\Sonata\ProductBundle\Entity\Catalog, '@doctrine' ]
+
+    app.product.catalog.type:
+        class: Application\Sonata\ProductBundle\Provider\CatalogProductProvider
+        arguments: [ '@serializer' ]

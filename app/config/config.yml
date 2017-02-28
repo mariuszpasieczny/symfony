@@ -2,10 +2,10 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: sonata/config.yml }
-    - { resource: sonata/block.yml }
+    - { resource: sonata/admin.yml }
     - { resource: fos/user.yml }
-    - { resource: sonata/user.yml }
+    - { resource: sonata/ecommerce.yml }
+    - { resource: sonata/services.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration

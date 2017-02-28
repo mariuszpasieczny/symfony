@@ -1,0 +1,136 @@
+doctrine:
+    orm:
+        entity_managers:
+            default:
+                mappings:
+                    SonataClassificationBundle: ~
+                    SonataUserBundle: ~
+                    FOSUserBundle: ~                                    # If SonataUserBundle extends it
+                    ApplicationSonataClassificationBundle: ~
+                    SonataClassificationBundle: ~
+                    ApplicationSonataMediaBundle: ~
+                    SonataMediaBundle: ~
+                    ApplicationSonataNotificationBundle: ~
+                    SonataNotificationBundle: ~
+                    ApplicationSonataProductBundle: ~
+                    SonataProductBundle: ~
+                    
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+        sonata.user.block.menu:    # used to display the menu in profile pages
+        sonata.user.block.account: # used to display menu option (login option)
+        sonata.block.service.text: # used to if you plan to use Sonata user routes
+        
+sonata_user:
+    security_acl: true
+    manager_type: orm # can be orm or mongodb
+    profile:
+        # Profile Form (firstname, lastname, etc ...)
+        form:
+            type:               sonata_user_profile
+            handler:            sonata.user.profile.form.handler.default
+            name:               sonata_user_profile_form
+            validation_groups:  [Profile]
+        menu:
+            - { route: 'sonata_user_profile_edit', label: 'link_edit_profile', domain: 'SonataUserBundle'}
+            - { route: 'sonata_user_profile_edit_authentication', label: 'link_edit_authentication', domain: 'SonataUserBundle'}
+            - { route: 'sonata_order_index', label: 'order_list', domain: 'SonataOrderBundle'}
+    
+#doctrine_phpcr:
+#    odm:
+#        auto_mapping: true
+#        mappings:
+#            SonataMediaBundle:
+#                prefix: Sonata\MediaBundle\PHPCR
+                
+sonata_media:
+    # if you don't use default namespace configuration
+    #class:
+    #    media: MyVendor\MediaBundle\Entity\Media
+    #    gallery: MyVendor\MediaBundle\Entity\Gallery
+    #    gallery_has_media: MyVendor\MediaBundle\Entity\GalleryHasMedia
+    db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr it is mandatory to choose one here
+    default_context: default # you need to set a context
+    contexts:
+        default:  # the default context is mandatory
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+                - sonata.media.provider.vimeo
+
+            formats:
+                small: { width: 100 , quality: 70}
+                big:   { width: 500 , quality: 70}
+                
+        product_catalog:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                small: { width: 100 , quality: 70}
+                big:   { width: 500 , quality: 70}
+
+    cdn:
+        server:
+            path: /uploads/media # http://media.sonata-project.org/
+
+    filesystem:
+        local:
+            directory:  "%kernel.root_dir%/../web/uploads/media"
+            create:     false
+            
+sonata_notification:
+    backend: sonata.notification.backend.runtime
+    
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+    #Sonata with Symfony >= 2.6
+    form_themes:
+        - 'SonataFormatterBundle:Form:formatter.html.twig'
+
+    #Sonata with Symfony <=2.5
+    form:
+        resources:
+            - 'SonataFormatterBundle:Form:formatter.html.twig'
+
+sonata_formatter:
+    formatters:
+        markdown:
+            service: sonata.formatter.text.markdown
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig #keep this commented unless you are using media bundle.
+
+        text:
+            service: sonata.formatter.text.text
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig
+
+        rawhtml:
+            service: sonata.formatter.text.raw
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig
+
+        richhtml:
+            service: sonata.formatter.text.raw
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig
+
+        twig:
+            service: sonata.formatter.text.twigengine
+            extensions: [] # Twig formatter cannot have extensions
