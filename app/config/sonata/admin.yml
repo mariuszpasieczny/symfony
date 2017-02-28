@@ -1,12 +1,3 @@
-stof_doctrine_extensions:
-    default_locale: pl_PL
-    orm:
-        default:
-            softdeleteable: true
-            loggable: true
-    class:
-        loggable: Ibrows\LoggableBundle\Listener\LoggableListener
-
 doctrine:
     orm:
         entity_managers:
@@ -23,11 +14,7 @@ doctrine:
                     SonataNotificationBundle: ~
                     ApplicationSonataProductBundle: ~
                     SonataProductBundle: ~
-                filters:
-                    softdeleteable:
-                        class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
-                        enabled: true
-                    
+
 sonata_block:
     default_contexts: [cms]
     blocks:

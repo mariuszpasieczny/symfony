@@ -2,6 +2,7 @@
 doctrine:
     dbal:
         types:
+            json: Sonata\Doctrine\Types\JsonType
             currency: Sonata\Component\Currency\CurrencyDoctrineType
             
 sonata_delivery:
