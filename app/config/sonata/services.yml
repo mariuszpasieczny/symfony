@@ -1,4 +1,30 @@
 services:
+    extension.listener:
+        class: AppBundle\Listener\DoctrineExtensionListener
+        calls:
+            - [ setContainer, [ "@service_container" ] ]
+        tags:
+            # loggable hooks user username if one is in security context
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+            
+    gedmo.listener.loggable:
+        class: Gedmo\Loggable\LoggableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]
+            
+    app.log:
+        class: Ibrows\LoggableBundle\Admin\LogAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: "Logs" }
+        arguments:
+            - ~
+            - Ibrows\LoggableBundle\Entity\Log
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+            
     app.product.catalog.manager:
         class: Sonata\ProductBundle\Entity\ProductManager
         arguments: [ Application\Sonata\ProductBundle\Entity\Catalog, '@doctrine' ]

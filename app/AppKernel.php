@@ -47,6 +47,8 @@ class AppKernel extends Kernel
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Sonata\FormatterBundle\SonataFormatterBundle(),
             new Sonata\IntlBundle\SonataIntlBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Ibrows\LoggableBundle\IbrowsLoggableBundle(),
             
             new Sonata\CustomerBundle\SonataCustomerBundle(),
             new Sonata\ProductBundle\SonataProductBundle(),

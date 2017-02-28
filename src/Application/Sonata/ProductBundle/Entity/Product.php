@@ -31,6 +31,12 @@ abstract class Product extends BaseProduct
     protected $id;
 
     /**
+     * @var \DateTime
+     *
+     */
+    private $deletedAt;
+
+    /**
      * Get id
      *
      * @return int $id
@@ -38,5 +44,15 @@ abstract class Product extends BaseProduct
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt($deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
     }
 }

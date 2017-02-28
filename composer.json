@@ -23,7 +23,8 @@
         "sonata-project/ecommerce": "^2.0",
         "sonata-project/classification-bundle": "^3.2",
         "sonata-project/notification-bundle": "^3.1",
-        "sonata-project/formatter-bundle": "^3.1"
+        "sonata-project/formatter-bundle": "^3.1",
+        "ibrows/loggable-bundle": "^2.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",

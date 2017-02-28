@@ -31,6 +31,12 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @var \DateTime
+     *
+     */
+    private $deletedAt;
+
+    /**
      * Get id
      *
      * @return int $id
@@ -38,5 +44,15 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt($deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
     }
 }
