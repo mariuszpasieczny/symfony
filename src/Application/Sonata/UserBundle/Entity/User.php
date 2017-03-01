@@ -55,4 +55,32 @@ class User extends BaseUser
     {
         $this->deletedAt = $deletedAt;
     }
+    /**
+     * @var \AppBundle\Entity\Shop
+     */
+    private $shop;
+
+
+    /**
+     * Set shop
+     *
+     * @param \AppBundle\Entity\Shop $shop
+     * @return User
+     */
+    public function setShop(\AppBundle\Entity\Shop $shop = null)
+    {
+        $this->shop = $shop;
+
+        return $this;
+    }
+
+    /**
+     * Get shop
+     *
+     * @return \AppBundle\Entity\Shop 
+     */
+    public function getShop()
+    {
+        return $this->shop;
+    }
 }

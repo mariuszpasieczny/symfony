@@ -55,4 +55,32 @@ abstract class Product extends BaseProduct
     {
         $this->deletedAt = $deletedAt;
     }
+    /**
+     * @var \AppBundle\Entity\Shop
+     */
+    private $shop;
+
+
+    /**
+     * Set shop
+     *
+     * @param \AppBundle\Entity\Shop $shop
+     * @return Product
+     */
+    public function setShop(\AppBundle\Entity\Shop $shop = null)
+    {
+        $this->shop = $shop;
+
+        return $this;
+    }
+
+    /**
+     * Get shop
+     *
+     * @return \AppBundle\Entity\Shop 
+     */
+    public function getShop()
+    {
+        return $this->shop;
+    }
 }

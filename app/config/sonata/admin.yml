@@ -39,6 +39,8 @@ sonata_user:
             - { route: 'sonata_user_profile_edit', label: 'link_edit_profile', domain: 'SonataUserBundle'}
             - { route: 'sonata_user_profile_edit_authentication', label: 'link_edit_authentication', domain: 'SonataUserBundle'}
             - { route: 'sonata_order_index', label: 'order_list', domain: 'SonataOrderBundle'}
+    impersonating:
+        route: sonata_admin_dashboard
         
 sonata_admin:
     title:      Admin Panel
@@ -88,23 +90,31 @@ sonata_admin:
                     - app.admin.shop
                     - sonata.user.admin.user
                     - sonata.user.admin.group
-                    - sonata.notification.admin.message
+#                    - sonata.notification.admin.message
                     - sonata.classification.admin.category
-                    - sonata.classification.admin.tag
-                    - sonata.classification.admin.collection
-                    - sonata.classification.admin.context
+#                    - sonata.classification.admin.tag
+#                    - sonata.classification.admin.collection
+#                    - sonata.classification.admin.context
                     - sonata.media.admin.media
-                    - sonata.media.admin.gallery
+#                    - sonata.media.admin.gallery
                     - app.log
+                roles:
+                    [ ROLE_SUPER_ADMIN ]
             sonata.admin.group.ecommerce:
                 label:           Catalog
                 label_catalogue: SonataEcommerceBundle
                 icon:            '<i class="fa fa-th"></i>'
                 items:
-                    - sonata.customer.admin.customer
+#                    - sonata.customer.admin.customer
                     - sonata.product.admin.product
-                    - sonata.order.admin.order
-                    - sonata.invoice.admin.invoice
+#                    - sonata.order.admin.order
+#                    - sonata.invoice.admin.invoice
+                roles:
+                    [ ROLE_ADMIN ]
+                    
+parameters:
+    sonata.user.admin.user.class: Application\Sonata\UserBundle\Admin\UserAdmin
+    sonata.product.admin.product.class: Application\Sonata\ProductBundle\Admin\ProductAdmin
     
 #doctrine_phpcr:
 #    odm:

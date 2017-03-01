@@ -44,7 +44,7 @@ sonata_payment:
         basket: sonata.payment.transformer.basket
 
 sonata_price:
-    currency: EUR
+    currency: PLN
 
 sonata_product:
     products:
