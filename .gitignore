@@ -11,3 +11,6 @@
 /bin/
 /composer.phar
 /nbproject
+/src/Application/Sonata/ProductBundle/Entity/*.php~
+/src/AppBundle/Entity/*.php~
+/src/Application/Sonata/UserBundle/Entity/*.php~
