@@ -8,6 +8,7 @@ class AppKernel extends Kernel
 
     public function init() {
         bcscale(3);
+        ini_set('memory_limit', '1G');
     }
     
     public function registerBundles()

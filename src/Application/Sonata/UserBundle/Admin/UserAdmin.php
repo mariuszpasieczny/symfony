@@ -8,41 +8,39 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class UserAdmin extends AbstractAdmin
-{
+class UserAdmin extends AbstractAdmin {
+
     /**
      * @param DatagridMapper $datagridMapper
      */
-    protected function configureDatagridFilters(DatagridMapper $filterMapper)
-    {
+    protected function configureDatagridFilters(DatagridMapper $filterMapper) {
         $filterMapper
-            ->add('id')
-            ->add('username')
-            ->add('locked')
-            ->add('email')
-            ->add('groups')
-            ->add('shop')
+                ->add('id')
+                ->add('username')
+                ->add('locked')
+                ->add('email')
+                ->add('groups')
+                ->add('shop')
         ;
     }
 
     /**
      * @param ListMapper $listMapper
      */
-    protected function configureListFields(ListMapper $listMapper)
-    {
+    protected function configureListFields(ListMapper $listMapper) {
         $listMapper
-            ->addIdentifier('username')
-            ->add('email')
-            ->add('groups')
-            ->add('shop')
-            ->add('enabled', null, array('editable' => true))
-            ->add('locked', null, array('editable' => true))
-            ->add('createdAt')
+                ->addIdentifier('username')
+                ->add('email')
+                ->add('groups')
+                ->add('shop')
+                ->add('enabled', null, array('editable' => true))
+                ->add('locked', null, array('editable' => true))
+                ->add('createdAt')
         ;
 
         if ($this->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
             $listMapper
-                ->add('impersonating', 'string', array('template' => 'SonataUserBundle:Admin:Field/impersonating.html.twig'))
+                    ->add('impersonating', 'string', array('template' => 'SonataUserBundle:Admin:Field/impersonating.html.twig'))
             ;
         }
     }
@@ -50,34 +48,35 @@ class UserAdmin extends AbstractAdmin
     /**
      * @param FormMapper $formMapper
      */
-    protected function configureFormFields(FormMapper $formMapper)
-    {
+    protected function configureFormFields(FormMapper $formMapper) {
         // define group zoning
         $formMapper
-            ->tab('User')
+                ->tab('User')
                 ->with('Profile', array('class' => 'col-md-6'))->end()
                 ->with('General', array('class' => 'col-md-6'))->end()
 //                ->with('Social', array('class' => 'col-md-6'))->end()
-            ->end()
-            ->tab('Security')
-                ->with('Status', array('class' => 'col-md-4'))->end()
-                ->with('Groups', array('class' => 'col-md-4'))->end()
+                ->end();
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $formMapper->tab('Security')
+                    ->with('Status', array('class' => 'col-md-4'))->end()
+                    ->with('Groups', array('class' => 'col-md-4'))->end()
 //                ->with('Keys', array('class' => 'col-md-4'))->end()
-                ->with('Shops', array('class' => 'col-md-4'))->end()
-                ->with('Roles', array('class' => 'col-md-12'))->end()
-            ->end()
-        ;
+                    ->with('Shops', array('class' => 'col-md-4'))->end()
+                    ->with('Roles', array('class' => 'col-md-12'))->end()
+                    ->end()
+            ;
+        }
 
         $now = new \DateTime();
 
         $formMapper
-            ->tab('User')
+                ->tab('User')
                 ->with('General')
-                    ->add('username')
-                    ->add('email')
-                    ->add('plainPassword', 'text', array(
-                        'required' => (!$this->getSubject() || is_null($this->getSubject()->getId())),
-                    ))
+                ->add('username')
+                ->add('email')
+                ->add('plainPassword', 'text', array(
+                    'required' => (!$this->getSubject() || is_null($this->getSubject()->getId())),
+                ))
                 ->end()
                 ->with('Profile')
 //                    ->add('dateOfBirth', 'sonata_type_date_picker', array(
@@ -86,8 +85,8 @@ class UserAdmin extends AbstractAdmin
 //                        'dp_max_date' => $now->format('c'),
 //                        'required' => false,
 //                    ))
-                    ->add('firstname', null, array('required' => false))
-                    ->add('lastname', null, array('required' => false))
+                ->add('firstname', null, array('required' => false))
+                ->add('lastname', null, array('required' => false))
 //                    ->add('website', 'url', array('required' => false))
 //                    ->add('biography', 'text', array('required' => false))
 //                    ->add('gender', 'sonata_user_gender', array(
@@ -96,7 +95,7 @@ class UserAdmin extends AbstractAdmin
 //                    ))
 //                    ->add('locale', 'locale', array('required' => false))
 //                    ->add('timezone', 'timezone', array('required' => false))
-                    ->add('phone', null, array('required' => false))
+                ->add('phone', null, array('required' => false))
                 ->end()
 //                ->with('Social')
 //                    ->add('facebookUid', null, array('required' => false))
@@ -106,54 +105,55 @@ class UserAdmin extends AbstractAdmin
 //                    ->add('gplusUid', null, array('required' => false))
 //                    ->add('gplusName', null, array('required' => false))
 //                ->end()
-            ->end()
-            ->tab('Security')
-                ->with('Status')
+                ->end();
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $formMapper->tab('Security')
+                    ->with('Status')
                     ->add('locked', null, array('required' => false))
                     ->add('expired', null, array('required' => false))
                     ->add('enabled', null, array('required' => false))
                     ->add('credentialsExpired', null, array('required' => false))
-                ->end()
-                ->with('Groups')
+                    ->end()
+                    ->with('Groups')
                     ->add('groups', 'sonata_type_model', array(
                         'required' => false,
                         'expanded' => true,
                         'multiple' => true,
                     ))
-                ->end()
-                ->with('Roles')
+                    ->end()
+                    ->with('Roles')
                     ->add('realRoles', 'sonata_security_roles', array(
                         'label' => 'form.label_roles',
                         'expanded' => true,
                         'multiple' => true,
                         'required' => false,
                     ))
-                ->end()
+                    ->end()
 //                ->with('Keys')
 //                    ->add('token', null, array('required' => false))
 //                    ->add('twoStepVerificationCode', null, array('required' => false))
 //                ->end()
-                ->with('Shops')
+                    ->with('Shops')
                     ->add('shop', null, array('required' => false))
-                ->end()
-            ->end()
-        ;
+                    ->end();
+        }
     }
 
     /**
      * @param ShowMapper $showMapper
      */
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
+    protected function configureShowFields(ShowMapper $showMapper) {
         $showMapper
-            ->with('General')
+                ->with('General')
                 ->add('username')
                 ->add('email')
-            ->end()
-            ->with('Groups')
-                ->add('groups')
-            ->end()
-            ->with('Profile')
+                ->end();
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $showMapper->with('Groups')
+                    ->add('groups')
+                    ->end();
+        }
+        $showMapper->with('Profile')
                 ->add('dateOfBirth')
                 ->add('firstname')
                 ->add('lastname')
@@ -163,19 +163,23 @@ class UserAdmin extends AbstractAdmin
                 ->add('locale')
                 ->add('timezone')
                 ->add('phone')
-            ->end()
-            ->with('Social')
-                ->add('facebookUid')
-                ->add('facebookName')
-                ->add('twitterUid')
-                ->add('twitterName')
-                ->add('gplusUid')
-                ->add('gplusName')
-            ->end()
-            ->with('Security')
-                ->add('token')
-                ->add('twoStepVerificationCode')
-            ->end()
+                ->end()
+//                ->with('Social')
+//                ->add('facebookUid')
+//                ->add('facebookName')
+//                ->add('twitterUid')
+//                ->add('twitterName')
+//                ->add('gplusUid')
+//                ->add('gplusName')
+//                ->end()
         ;
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $showMapper->with('Security')
+                    ->add('token')
+                    ->add('twoStepVerificationCode')
+                    ->end()
+            ;
+        }
     }
+
 }

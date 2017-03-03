@@ -1,4 +1,10 @@
 services:
+    app.admin.shop:
+        class: AppBundle\Admin\ShopAdmin
+        arguments: [~, AppBundle\Entity\Shop, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Shop }
+            
     app.product.catalog.manager:
         class: Sonata\ProductBundle\Entity\ProductManager
         arguments: [ Application\Sonata\ProductBundle\Entity\Catalog, '@doctrine' ]
@@ -6,9 +12,31 @@ services:
     app.product.catalog.type:
         class: Application\Sonata\ProductBundle\Provider\CatalogProductProvider
         arguments: [ '@serializer' ]
-        
-    app.admin.shop:
-        class: AppBundle\Admin\ShopAdmin
-        arguments: [~, AppBundle\Entity\Shop, SonataAdminBundle:CRUD]
+        calls:
+            - [ setSecurityContext, [ "@security.context" ] ]
+            
+    app.acl.voter:
+        class: AppBundle\Security\AclVoter
+        arguments: [ '@service_container', '@security.acl.dbal.connection', %security.role_hierarchy.roles% ]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Shop }
+            - { name: security.voter }
+        # small performance boost
+        public: false
+        
+    app.admin.acl_extension:
+        class: AppBundle\Admin\Extension\AclAdminExtension
+        arguments: [ '@security.context', '@security.acl.dbal.connection' ]
+        tags:
+            - { name: sonata.admin.extension, target: sonata.media.admin.media }
+        
+    app.product.admin.access_extension:
+        class: Application\Sonata\ProductBundle\Admin\Extension\AccessAdminExtension
+        arguments: [ '@security.context', '@security.acl.dbal.connection' ]
+        tags:
+            - { name: sonata.admin.extension, target: sonata.product.admin.product }
+        
+    app.product.admin.create_extension:
+        class: Application\Sonata\ProductBundle\Admin\Extension\NewInstanceAdminExtension
+        arguments: [ '@security.context' ]
+        tags:
+            - { name: sonata.admin.extension, target: sonata.product.admin.product }

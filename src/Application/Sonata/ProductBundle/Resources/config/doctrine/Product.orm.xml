@@ -17,7 +17,7 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
-        <many-to-one field="shop" target-entity="AppBundle\Entity\Shop">
+        <many-to-one field="shop" target-entity="AppBundle\Entity\Shop" nullable="false">
             <join-column name="shop_id" referenced-column-name="id" />
         </many-to-one>
         <field name="deletedAt" type="datetime" column="deleted_at" nullable="true"/>
