@@ -25,7 +25,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  *
  * @author <yourname> <youremail>
  */
-class CatalogProductProvider extends BaseProductProvider {
+class OfferProductProvider extends BaseProductProvider {
 
     /**
      * Security Context
@@ -51,7 +51,7 @@ class CatalogProductProvider extends BaseProductProvider {
      * {@inheritDoc}
      */
     public function getBaseControllerName() {
-        return 'SonataProductBundle:Catalog';
+        return 'SonataProductBundle:Offer';
     }
 
     /**
@@ -118,8 +118,8 @@ class CatalogProductProvider extends BaseProductProvider {
                     'required' => false,
                         ), array(
                     'link_parameters' => array(
-                        'context' => 'product_catalog',
-                        'filter' => array('context' => array('value' => 'product_catalog')),
+                        'context' => 'product_offer',
+                        'filter' => array('context' => array('value' => 'product_offer')),
                         'provider' => '',
                     ),
                 ));
@@ -130,8 +130,8 @@ class CatalogProductProvider extends BaseProductProvider {
 //                    'required' => false,
 //                        ), array(
 //                    'link_parameters' => array(
-//                        'context' => 'product_catalog',
-//                        'filter' => array('context' => array('value' => 'product_catalog')),
+//                        'context' => 'product_offer',
+//                        'filter' => array('context' => array('value' => 'product_offer')),
 //                        'provider' => '',
 //                    ),
 //                ));

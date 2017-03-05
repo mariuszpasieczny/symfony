@@ -18,7 +18,7 @@ use Sonata\ProductBundle\Controller\BaseProductController;
  * for the current product
  *
  */
-class CatalogController extends BaseProductController
+class OfferController extends BaseProductController
 {
 
 }

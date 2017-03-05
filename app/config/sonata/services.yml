@@ -5,12 +5,12 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Shop }
             
-    app.product.catalog.manager:
+    app.product.offer.manager:
         class: Sonata\ProductBundle\Entity\ProductManager
-        arguments: [ Application\Sonata\ProductBundle\Entity\Catalog, '@doctrine' ]
+        arguments: [ Application\Sonata\ProductBundle\Entity\Offer, '@doctrine' ]
 
-    app.product.catalog.type:
-        class: Application\Sonata\ProductBundle\Provider\CatalogProductProvider
+    app.product.offer.type:
+        class: Application\Sonata\ProductBundle\Provider\OfferProductProvider
         arguments: [ '@serializer' ]
         calls:
             - [ setSecurityContext, [ "@security.context" ] ]

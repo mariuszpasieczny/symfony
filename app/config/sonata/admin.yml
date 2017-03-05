@@ -91,6 +91,7 @@ sonata_admin:
                     - app.admin.shop
                     - sonata.user.admin.user
                     - sonata.user.admin.group
+                    - sonata.product.admin.product
 #                    - sonata.notification.admin.message
                     - sonata.classification.admin.category
 #                    - sonata.classification.admin.tag
@@ -101,17 +102,17 @@ sonata_admin:
                     - app.log
                 roles:
                     [ ROLE_SONATA_ADMIN ]
-            sonata.admin.group.ecommerce:
-                label:           Catalog
-                label_catalogue: SonataEcommerceBundle
-                icon:            '<i class="fa fa-th"></i>'
-                items:
-#                    - sonata.customer.admin.customer
-                    - sonata.product.admin.product
-#                    - sonata.order.admin.order
-#                    - sonata.invoice.admin.invoice
-                roles:
-                    [ ROLE_SONATA_ADMIN ]
+#            sonata.admin.group.ecommerce:
+#                label:           Catalog
+#                label_catalogue: SonataEcommerceBundle
+#                icon:            '<i class="fa fa-th"></i>'
+#                items:
+##                    - sonata.customer.admin.customer
+#                    - sonata.product.admin.product
+##                    - sonata.order.admin.order
+##                    - sonata.invoice.admin.invoice
+#                roles:
+#                    [ ROLE_SONATA_ADMIN ]
     
 #doctrine_phpcr:
 #    odm:
@@ -141,7 +142,7 @@ sonata_media:
                 small: { width: 100 , quality: 70}
                 big:   { width: 500 , quality: 70}
                 
-        product_catalog:
+        product_offer:
             providers:
                 - sonata.media.provider.image
             formats:
@@ -211,5 +212,5 @@ sonata_formatter:
                     
 parameters:
     sonata.user.admin.user.class: Application\Sonata\UserBundle\Admin\UserAdmin
-    sonata.product.admin.product.class: Application\Sonata\ProductBundle\Admin\ProductAdmin
+    sonata.product.admin.product.class: Application\Sonata\ProductBundle\Admin\OfferAdmin
     security.acl.permission.map.class: Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap

@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
-use Application\Sonata\ProductBundle\Entity\Catalog;
+use Application\Sonata\ProductBundle\Entity\Offer;
 use Application\Sonata\ClassificationBundle\Entity\Category;
 use Application\Sonata\MediaBundle\Entity\Media;
 
@@ -49,7 +49,7 @@ class AclVoter extends Voter {
         if (
                 !$subject instanceof Media 
                 && !$subject instanceof Category 
-//                && !$subject instanceof Catalog
+//                && !$subject instanceof Offer
                 ) {
             return false;
         }

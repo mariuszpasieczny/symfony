@@ -48,8 +48,8 @@ sonata_price:
 
 sonata_product:
     products:
-        app.product.catalog:
-            provider:             app.product.catalog.type  # Required
-            manager:              app.product.catalog.manager  # Required
+        app.product.offer:
+            provider:             app.product.offer.type  # Required
+            manager:              app.product.offer.manager  # Required
             variations:
                 fields:           [] # Required
