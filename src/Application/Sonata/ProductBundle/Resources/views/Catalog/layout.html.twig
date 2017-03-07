@@ -1,0 +1,93 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block body %}
+
+    {#{% block sonata_page_breadcrumb %}
+        <div class="row-fluid clearfix">
+            {{ sonata_block_render_event('breadcrumb', { 'context': 'catalog', 'category': category, 'current_uri': app.request.requestUri }) }}
+        </div>
+    {% endblock %}#}
+
+    <div class="col-md-3">
+        {#<p class="lead">Shop Name</p>
+        <div class="list-group">
+            <a href="#" class="list-group-item">Category 1</a>
+            <a href="#" class="list-group-item">Category 2</a>
+            <a href="#" class="list-group-item">Category 3</a>
+        </div>#}
+
+        {% block product_category %}
+            {{ sonata_block_render({'type': 'sonata.product.block.categories_menu', 'settings': {
+                'current_uri': app.request.requestUri,
+                'extra_cache_keys': {
+                    'block_id':    'sonata.product.block.categories_menu',
+                    'updated_at':  'now',
+                },
+                'ttl': 60
+            }}) }}
+        {% endblock %}
+
+        {#{% block product_filter %}
+            {% if provider %}
+                <div class="well" style="padding: 8px 0;">
+                    {{ sonata_block_render({'type': 'sonata.product.block.filters_menu'}, {'product_provider': provider, 'current_uri': app.request.requestUri}) }}
+                </div>
+            {% endif %}
+        {% endblock %}#}
+    </div>
+
+    <div class="col-md-9">
+
+        <div class="panel panel-default sonata-product-navigation-bar">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h4 class="panel-title">
+                            {% if category %}
+                                {{ category.name }}
+                            {% else %}
+                                {% trans from 'SonataProductBundle' %}catalog_root_title{% endtrans %}
+                            {% endif %}
+                        </h4>
+                    </div>
+                </div>
+            </div>
+
+            {% if pager.count == 0 %}
+
+                {% block no_products %}
+                    <div class="panel-body product-grid">
+                        {% trans from 'SonataProductBundle' %}no_products_available{% endtrans %}
+                    </div>
+                {% endblock %}
+
+            {% else %}
+
+            {% block products %}{% endblock %}
+
+            {% if pager.paginationData.pageCount > 1 %}
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            {% include 'SonataProductBundle:Catalog:_pager.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+
+</div>
+<!-- /.container -->
+{% endblock %}

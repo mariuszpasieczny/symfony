@@ -50,6 +50,9 @@ class AppKernel extends Kernel
             new Sonata\IntlBundle\SonataIntlBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Ibrows\LoggableBundle\IbrowsLoggableBundle(),
+            new Sonata\SeoBundle\SonataSeoBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             
             new Sonata\CustomerBundle\SonataCustomerBundle(),
             new Sonata\ProductBundle\SonataProductBundle(),

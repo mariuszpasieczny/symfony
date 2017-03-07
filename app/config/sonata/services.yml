@@ -40,3 +40,7 @@ services:
         arguments: [ '@security.context' ]
         tags:
             - { name: sonata.admin.extension, target: sonata.product.admin.product }
+            
+    sonata.product.menu.product_menu_builder:
+        class: Application\Sonata\ProductBundle\Menu\ProductMenuBuilder
+        arguments: [ '@knp_menu.factory', '@sonata.product_category.product', '@router' ]
