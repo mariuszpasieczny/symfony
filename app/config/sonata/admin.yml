@@ -103,6 +103,7 @@ sonata_admin:
                     - sonata.classification.admin.context
                     - sonata.media.admin.media
 #                    - sonata.media.admin.gallery
+                    - sonata.news.admin.post
                     - app.log
                 roles:
                     [ ROLE_SONATA_ADMIN ]
@@ -124,6 +125,19 @@ sonata_admin:
 #        mappings:
 #            SonataMediaBundle:
 #                prefix: Sonata\MediaBundle\PHPCR
+
+sonata_news:
+    title:        Sonata Project
+    link:         https://sonata-project.org
+    description:  Cool bundles on top of Symfony2
+    salt:         'secureToken'
+    permalink_generator: sonata.news.permalink.date # sonata.news.permalink.collection
+
+    comment:
+        notification:
+            emails:   [email@example.org, email2@example.org]
+            from:     no-reply@sonata-project.org
+            template: 'SonataNewsBundle:Mail:comment_notification.txt.twig'
                 
 sonata_media:
     # if you don't use default namespace configuration
@@ -145,6 +159,7 @@ sonata_media:
             formats:
                 small: { width: 100 , quality: 70}
                 big:   { width: 500 , quality: 70}
+                wide:   { width: 970 , quality: 70}
                 
         product_offer:
             providers:
@@ -152,6 +167,7 @@ sonata_media:
             formats:
                 small: { width: 100 , quality: 70}
                 big:   { width: 500 , quality: 70}
+                large: { width: 636 , quality: 70}
                 
         category:
             providers:
@@ -159,6 +175,15 @@ sonata_media:
             formats:
                 small: { width: 100 , quality: 70}
                 big:   { width: 500 , quality: 70}
+
+        news:
+            providers:
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+
+            formats:
+                small: { width: 150 , quality: 95}
+                big:   { width: 970 , quality: 90}
 
     cdn:
         server:
@@ -220,6 +245,13 @@ sonata_formatter:
         twig:
             service: sonata.formatter.text.twigengine
             extensions: [] # Twig formatter cannot have extensions
+            
+ivory_ck_editor:
+#    default_config: default
+    configs:
+        news:
+            toolbar:      standard
+            
 sonata_seo:
     encoding:         UTF-8
     page:

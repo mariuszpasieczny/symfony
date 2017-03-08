@@ -27,7 +27,8 @@
         "ibrows/loggable-bundle": "^2.2",
         "sonata-project/seo-bundle": "^2.1",
         "knplabs/knp-paginator-bundle": "^2.5",
-        "symfony/assetic-bundle": "^2.8"
+        "symfony/assetic-bundle": "^2.8",
+        "sonata-project/news-bundle": "^3.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",

@@ -44,3 +44,17 @@ services:
     sonata.product.menu.product_menu_builder:
         class: Application\Sonata\ProductBundle\Menu\ProductMenuBuilder
         arguments: [ '@knp_menu.factory', '@sonata.product_category.product', '@router' ]
+        
+    app.block.breadcrumb_about:
+        class: AppBundle\Block\AboutBreadcrumbBlockService
+        arguments: [ 'about', 'app.block.breadcrumb_about', '@templating', '@knp_menu.menu_provider', '@knp_menu.factory' ]
+        tags:
+            - { name: sonata.block }
+            - { name: sonata.breadcrumb }
+        
+    breadcrumb_contact:
+        class: AppBundle\Block\ContactBreadcrumbBlockService
+        arguments: [ 'contact', 'app.block.breadcrumb_contact', '@templating', '@knp_menu.menu_provider', '@knp_menu.factory' ]
+        tags:
+            - { name: sonata.block }
+            - { name: sonata.breadcrumb }

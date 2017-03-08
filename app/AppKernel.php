@@ -54,6 +54,9 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             
+            new Sonata\NewsBundle\SonataNewsBundle(),
+            new Application\Sonata\NewsBundle\ApplicationSonataNewsBundle(),
+            
             new Sonata\CustomerBundle\SonataCustomerBundle(),
             new Sonata\ProductBundle\SonataProductBundle(),
             new Sonata\BasketBundle\SonataBasketBundle(),

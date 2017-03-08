@@ -12,49 +12,37 @@ file that was distributed with this source code.
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block body %}
+    <div class="row">
 
-    {% set variations_properties = variations_properties|default([]) %}
+        {% set variations_properties = variations_properties|default([]) %}
 
-    {% block product_javascript_init %}
-        <script type="text/javascript">
-            jQuery(document).ready(function () {
-                Sonata.Product.init({
-                    url: {
-                        infoStockPrice: '{{ path('sonata_product_price_stock', {'productId': product.id}) }}'
-                    },
-                    targets: {
-                        inputAddBasket: $('#add_basket_quantity'),
-                        productPrice: $('#sonata_product_price'),
-                        submitBasketBtn: $('#sonata_add_basket_submit'),
-                        addBasketError: $('#sonata_add_basket_error')
-                    }
+        {% block product_javascript_init %}
+            <script type="text/javascript">
+                jQuery(document).ready(function () {
+                    Sonata.Product.init({
+                        url: {
+                            infoStockPrice: '{{ path('sonata_product_price_stock', {'productId': product.id}) }}'
+                        },
+                        targets: {
+                            inputAddBasket: $('#add_basket_quantity'),
+                            productPrice: $('#sonata_product_price'),
+                            submitBasketBtn: $('#sonata_add_basket_submit'),
+                            addBasketError: $('#sonata_add_basket_error')
+                        }
+                    });
                 });
-            });
-        </script>
-    {% endblock %}
+            </script>
+        {% endblock %}
 
-    {#{% block breadcrumb %}
-        <div class="clearfix">
-            {{ sonata_block_render_event('breadcrumb', { 'context': 'catalog', 'product': product, 'current_uri': app.request.requestUri }) }}
-        </div>
-    {% endblock %}#}
-
-    {% block product %}
-        {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
-
-        <div class="col-md-12">
-
-            <div class="panel panel-default sonata-product-navigation-bar">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <h4 class="panel-title">
-                                {{ product.name }}
-                            </h4>
-                        </div>
-                    </div>
-                </div>
+        {% block breadcrumb %}
+            <div class="clearfix">
+                {{ sonata_block_render_event('breadcrumb', { 'context': 'catalog', 'product': product, 'current_uri': app.request.requestUri }) }}
             </div>
+        {% endblock %}
+
+        {% block product %}
+            {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
+
             <!-- Begin product display -->
             <div class="row" itemscope itemtype="http://schema.org/Product">
                 {% block product_left %}
@@ -64,7 +52,7 @@ file that was distributed with this source code.
                                 {% if product.gallery and product.gallery.galleryHasMedias|length > 0 %}
                                     {% include "SonataProductBundle:Product:carousel.html.twig" %}
                                 {% else %}
-                                    {% thumbnail product.image, 'big' with {'itemprop':'image', 'class': 'img-rounded img-responsive', 'style': 'margin: 0 10px 10px 0;'} %}
+                                    {% thumbnail product.image, 'large' with {'itemprop':'image', 'class': 'img-rounded img-responsive', 'style': 'margin: 0 10px 10px 0;'} %}
                                 {% endif %}
                             </div>
                         {% endblock %}
@@ -171,7 +159,6 @@ file that was distributed with this source code.
         {% block product_comments %}
             {{ sonata_block_render_event('sonata.comment', {'id': 'front-product-' ~ product.id}) }}
         {% endblock %}
-
     </div>
 
 {% endblock %}

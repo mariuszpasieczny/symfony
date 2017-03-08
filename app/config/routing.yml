@@ -1,6 +1,18 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+    
+about:
+    path: /about
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    static/about.html.twig
+    
+contact:
+    path: /contact
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    static/contact.html.twig
 
 admin_area:
     resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
@@ -74,3 +86,7 @@ sonata_payment:
 sonata_invoice:
     resource: "@SonataInvoiceBundle/Resources/config/routing/invoice.xml"
     prefix: /shop/user/invoice
+    
+news:
+    resource: '@SonataNewsBundle/Resources/config/routing/news.xml'
+    prefix: /news
