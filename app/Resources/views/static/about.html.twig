@@ -5,7 +5,7 @@
 
         {% block sonata_page_breadcrumb %}
             <div class="row-fluid clearfix">
-                {{ sonata_block_render_event('breadcrumb', { 'context': 'about', 'current_uri': app.request.requestUri }) }}
+                {{ sonata_block_render_event('breadcrumb', { 'context': 'page', 'page': 'about', 'current_uri': app.request.requestUri }) }}
             </div>
         {% endblock %}
 

@@ -5,13 +5,13 @@ namespace AppBundle\Block;
 use Sonata\SeoBundle\Block\Breadcrumb\BaseBreadcrumbMenuBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 
-class AboutBreadcrumbBlockService extends BaseBreadcrumbMenuBlockService {
+class PageBreadcrumbBlockService extends BaseBreadcrumbMenuBlockService {
 
     /**
      * {@inheritdoc}
      */
     public function getName() {
-        return 'app.block.breadcrumb_about';
+        return 'app.page.block.breadcrumb';
     }
 
     /**
@@ -21,10 +21,12 @@ class AboutBreadcrumbBlockService extends BaseBreadcrumbMenuBlockService {
 
         $menu = $this->getRootMenu($blockContext);
 
-        $menu->addChild('app_block_breadcrumb_about', array(
-            'route' => 'about',
-            'extras' => array('translation_domain' => 'AppBundle'),
-        ));
+        if ($page = $blockContext->getBlock()->getSetting('page')) {
+            $menu->addChild(sprintf("app_page_block_breadcrumb_%s", $page), array(
+                'route' => $page,
+                'extras' => array('translation_domain' => 'AppBundle'),
+            ));
+        }
 
         return $menu;
     }

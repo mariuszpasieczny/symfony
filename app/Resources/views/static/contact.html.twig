@@ -4,11 +4,8 @@
     <div class="row">
 
         {% block sonata_page_breadcrumb %}
-            {% if breadcrumb_context is not defined %}
-                {% set breadcrumb_context = 'contact' %}
-            {% endif %}
             <div class="row-fluid clearfix">
-                {{ sonata_block_render_event('breadcrumb', { 'context': breadcrumb_context, 'current_uri': app.request.requestUri }) }}
+                {{ sonata_block_render_event('breadcrumb', { 'context': 'page', 'page': 'contact', 'current_uri': app.request.requestUri }) }}
             </div>
         {% endblock %}
 
