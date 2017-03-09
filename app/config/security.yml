@@ -57,8 +57,9 @@ security:
         ROLE_EDITOR:      [ ROLE_USER ]
         ROLE_ADMIN:       [ ROLE_EDITOR ]
         ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
-#        SONATA:
-#            - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT  # if you are using acl then this line must be commented
+        SONATA:
+            - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT  # if you are using acl then this line must be commented
+            - ROLE_SONATA_PAGE_ADMIN_BLOCK_EDIT
             
     # set access_strategy to unanimous, else you may have unexpected behaviors
     access_decision_manager:

@@ -57,6 +57,11 @@ class AppKernel extends Kernel
             new Sonata\NewsBundle\SonataNewsBundle(),
             new Application\Sonata\NewsBundle\ApplicationSonataNewsBundle(),
             
+            new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
+            new Sonata\CacheBundle\SonataCacheBundle(),
+            new Sonata\PageBundle\SonataPageBundle(),
+            new Application\Sonata\PageBundle\ApplicationSonataPageBundle(),
+            
             new Sonata\CustomerBundle\SonataCustomerBundle(),
             new Sonata\ProductBundle\SonataProductBundle(),
             new Sonata\BasketBundle\SonataBasketBundle(),

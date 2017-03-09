@@ -2,17 +2,17 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
     
-about:
-    path: /about
-    defaults:
-        _controller: FrameworkBundle:Template:template
-        template:    static/about.html.twig
-    
-contact:
-    path: /contact
-    defaults:
-        _controller: FrameworkBundle:Template:template
-        template:    static/contact.html.twig
+#about:
+#    path: /about
+#    defaults:
+#        _controller: FrameworkBundle:Template:template
+#        template:    static/about.html.twig
+#    
+#contact:
+#    path: /contact
+#    defaults:
+#        _controller: FrameworkBundle:Template:template
+#        template:    static/contact.html.twig
 
 admin_area:
     resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
@@ -90,3 +90,15 @@ sonata_invoice:
 news:
     resource: '@SonataNewsBundle/Resources/config/routing/news.xml'
     prefix: /news
+    
+sonata_cache_cache:
+    resource: '@SonataCacheBundle/Resources/config/routing/cache.xml'
+    prefix: /
+    
+sonata_page_exceptions:
+    resource: '@SonataPageBundle/Resources/config/routing/exceptions.xml'
+    prefix: /
+
+sonata_page_cache:
+    resource: '@SonataPageBundle/Resources/config/routing/cache.xml'
+    prefix: /
