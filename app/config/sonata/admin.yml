@@ -18,22 +18,6 @@ doctrine:
                     SonataProductBundle: ~
                     ApplicationSonataPageBundle: ~
                     SonataPageBundle: ~
-
-sonata_block:
-#    default_contexts: [cms]
-    default_contexts: [sonata_page_bundle]
-    blocks:
-        # enable the SonataAdminBundle block
-        sonata.admin.block.admin_list:
-            contexts: [admin]
-        sonata.user.block.menu:    # used to display the menu in profile pages
-        sonata.user.block.account: # used to display menu option (login option)
-        sonata.block.service.text: # used to if you plan to use Sonata user routes
-        sonata.product.block.categories_menu:
-        sonata.product.block.filters_menu:
-        sonata.product.block.variations_form:
-        sonata.product.block.similar_products:
-    context_manager: sonata.page.block.context_manager
         
 sonata_user:
     security_acl: true
@@ -107,8 +91,8 @@ sonata_admin:
 #                    - sonata.classification.admin.tag
 #                    - sonata.classification.admin.collection
                     - sonata.classification.admin.context
+                    - sonata.media.admin.gallery
                     - sonata.media.admin.media
-#                    - sonata.media.admin.gallery
                     - sonata.news.admin.post
                     - app.log
                     - sonata.page.admin.site
@@ -156,6 +140,29 @@ sonata_admin:
             - bundles/sonataadmin/vendor/jqueryui/themes/flick/jquery-ui.min.css
             - bundles/sonatapage/sonata-page.back.min.css
 
+sonata_block:
+#    default_contexts: [cms]
+    default_contexts: [sonata_page_bundle]
+    blocks:
+        sonata.block.service.text: # used to if you plan to use Sonata user routes
+        sonata.product.block.recent_products:
+            settings:
+                number: 4
+                title: 'Recent products'
+                template: 'SonataProductBundle:Block:recent_products.html.twig'
+        sonata.media.block.media:
+        sonata.media.block.feature_media:
+        sonata.media.block.gallery:
+            settings:
+                template: 'SonataGalleryBundle:Block:block_gallery.html.twig'
+        sonata.media.block.gallery_list:
+        sonata.news.block.recent_posts:
+            settings:
+                template: 'SonataNewsBundle:Block:block_posts.html.twig'
+        sonata.news.block.recent_comments:
+        
+    context_manager: sonata.page.block.context_manager
+
 sonata_news:
     title:        Sonata Project
     link:         https://sonata-project.org
@@ -187,24 +194,31 @@ sonata_media:
 #                - sonata.media.provider.vimeo
 
             formats:
-                small: { width: 100 , quality: 70}
-                big:   { width: 500 , quality: 70}
-                wide:   { width: 970 , quality: 70}
+                small:  { width: 100 , quality: 70}
+                medium: { width: 300 , quality: 70}
+                big:    { width: 500 , quality: 70}
+                large:  { width: 636 , quality: 70}
+                wide:   { width: 1000 , quality: 70}
                 
         product_offer:
             providers:
                 - sonata.media.provider.image
             formats:
-                small: { width: 100 , quality: 70}
-                big:   { width: 500 , quality: 70}
-                large: { width: 636 , quality: 70}
+                small:  { width: 150 , quality: 70}
+                medium: { width: 300 , quality: 70}
+                big:    { width: 500 , quality: 70}
+                large:  { width: 636 , quality: 70}
+                wide:   { width: 1000 , quality: 70}
                 
         category:
             providers:
                 - sonata.media.provider.image
             formats:
-                small: { width: 100 , quality: 70}
-                big:   { width: 500 , quality: 70}
+                small:  { width: 150 , quality: 70}
+                medium: { width: 300 , quality: 70}
+                big:    { width: 500 , quality: 70}
+                large:  { width: 636 , quality: 70}
+                wide:   { width: 1000 , quality: 70}
 
         news:
             providers:
@@ -212,8 +226,11 @@ sonata_media:
                 - sonata.media.provider.image
 
             formats:
-                small: { width: 150 , quality: 95}
-                big:   { width: 970 , quality: 90}
+                small:  { width: 150 , quality: 70}
+                medium: { width: 300 , quality: 70}
+                big:    { width: 500 , quality: 70}
+                large:  { width: 636 , quality: 70}
+                wide:   { width: 1000 , quality: 70}
 
     cdn:
         server:
@@ -264,10 +281,8 @@ sonata_page:
         
     default_template: default # template key from templates section, used as default for new pages
     templates:
-#        default:  { path: 'SonataPageBundle::layout.html.twig',          name: 'default' }
-#        2columns: { path: 'SonataPageBundle::2columns_layout.html.twig', name: '2 columns layout' }
         default:
-            path: 'SonataPageBundle::layout.html.twig'
+            path: 'ApplicationSonataPageBundle::layout.html.twig'
             name: 'default'
             containers:
                 header:
@@ -298,6 +313,55 @@ sonata_page:
                   C: content
                   B: content_bottom
                   F: footer
+
+        3columns:
+            path: 'ApplicationSonataPageBundle::3columns_layout.html.twig'
+            name: '3 columns layout'
+            inherits_containers: default
+            containers:
+                left_col:
+                    name: Left column
+                    blocks:
+                        - sonata.media.block.media
+                        - sonata.block.service.text
+                        - sonata.news.block.recent_posts
+                content:
+                    name: Main content
+                    blocks:
+                        - sonata.media.block.media
+                        - sonata.block.service.text
+                        - sonata.news.block.recent_posts
+                right_col:
+                    name: Right column
+                    blocks:
+                        - sonata.media.block.media
+                        - sonata.block.service.text
+                        - sonata.news.block.recent_posts
+            matrix:
+                layout: |
+
+                    HHHHHHHHHH
+                    TTTTTTTTTT
+                    TTTTTTTTTT
+                    LLLCCCCRRR
+                    LLLCCCCRRR
+                    BBBBBBBBBB
+                    BBBBBBBBBB
+                    FFFFFFFFFF
+
+                mapping:
+                   H: header
+                   T: content_top
+                   L: left_col
+                   R: right_col
+                   C: content
+                   B: content_bottom
+                   F: footer
+    assets:
+        stylesheets:
+            - bundles/app/css/bootstrap.min.css
+            - bundles/app/css/shop-homepage.css
+            - bundles/app/css/sonata-front.css
 
     # manage the http errors
     catch_exceptions:
@@ -416,3 +480,37 @@ parameters:
     sonata.product.admin.product.class: Application\Sonata\ProductBundle\Admin\OfferAdmin
     security.acl.permission.map.class: Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap
     sonata.product_category.manager.class: Application\Sonata\ProductBundle\Entity\ProductCategoryManager
+
+fos_comment:
+    db_driver: orm
+    class:
+        model:
+            comment: AppBundle\Entity\Comment
+            thread: AppBundle\Entity\Thread
+
+assetic:
+    bundles: [ "FOSCommentBundle" ]
+    
+nelmio_api_doc: ~
+
+framework:
+    templating:
+        engines: ['twig']
+
+fos_rest:
+    param_fetcher_listener: true
+    body_listener:          true
+    format_listener:        true
+    view:
+        view_response_listener: force
+    body_converter:
+        enabled: true
+        validate: true
+
+sensio_framework_extra:
+    view:    { annotations: false }
+    router:  { annotations: true }
+    request: { converters: true }
+
+twig:
+    exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'

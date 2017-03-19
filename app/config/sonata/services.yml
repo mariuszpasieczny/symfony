@@ -45,9 +45,8 @@ services:
         class: Application\Sonata\ProductBundle\Menu\ProductMenuBuilder
         arguments: [ '@knp_menu.factory', '@sonata.product_category.product', '@router' ]
         
-    app.page.block.breadcrumb:
-        class: AppBundle\Block\PageBreadcrumbBlockService
-        arguments: [ 'page', 'app.page.block.breadcrumb', '@templating', '@knp_menu.menu_provider', '@knp_menu.factory' ]
+    sonata.product.block.recent_products:
+        class: Sonata\ProductBundle\Block\RecentProductsBlockService
+        arguments: [ 'sonata.product.block.recent_products', '@templating', '@doctrine', '@sonata.price.currency.detector', 'Application\Sonata\ProductBundle\Entity\Offer' ]
         tags:
             - { name: sonata.block }
-            - { name: sonata.breadcrumb }

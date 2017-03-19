@@ -31,7 +31,8 @@
         "sonata-project/news-bundle": "^3.1",
         "sonata-project/page-bundle": "^3.3",
         "sonata-project/cache-bundle": "^2.3",
-        "symfony-cmf/routing": "^1.4"
+        "symfony-cmf/routing": "^1.4",
+        "nelmio/api-doc-bundle": "^2.13"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",

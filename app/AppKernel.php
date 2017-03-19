@@ -77,6 +77,13 @@ class AppKernel extends Kernel
             new Application\Sonata\OrderBundle\ApplicationSonataOrderBundle(),
             new Application\Sonata\PaymentBundle\ApplicationSonataPaymentBundle(),
             new Application\Sonata\ProductBundle\ApplicationSonataProductBundle(),
+            
+//            new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
+//            new Ibrows\Bundle\NewsletterBundle\IbrowsNewsletterBundle(),
+            
+            new FOS\RestBundle\FOSRestBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new FOS\CommentBundle\FOSCommentBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

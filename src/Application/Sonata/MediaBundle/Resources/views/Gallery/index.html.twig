@@ -9,11 +9,8 @@ file that was distributed with this source code.
 
 #}
 
-{% extends 'SonataProductBundle:Catalog:layout.html.twig' %}
-
-
-{% block products %}
-
-    {% include 'SonataProductBundle:Catalog:' ~ display_mode ~ '.html.twig' %}
-
-{% endblock %}
+<ul>
+    {% for gallery in galleries %}
+        <li><a href="{{ url('sonata_media_gallery_view', {'id' : gallery|sonata_urlsafeid }) }}">{{ gallery.name }}</a></li>
+    {% endfor %}
+</ul>

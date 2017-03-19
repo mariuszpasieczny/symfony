@@ -1,18 +1,6 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
-    
-#about:
-#    path: /about
-#    defaults:
-#        _controller: FrameworkBundle:Template:template
-#        template:    static/about.html.twig
-#    
-#contact:
-#    path: /contact
-#    defaults:
-#        _controller: FrameworkBundle:Template:template
-#        template:    static/contact.html.twig
 
 admin_area:
     resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
@@ -102,3 +90,58 @@ sonata_page_exceptions:
 sonata_page_cache:
     resource: '@SonataPageBundle/Resources/config/routing/cache.xml'
     prefix: /
+    
+fos_comment_api:
+    type: rest
+    resource: "@FOSCommentBundle/Resources/config/routing.yml"
+    prefix: /api
+    defaults: { _format: html }
+    
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
+    
+sonata_api_user:
+    type:         rest
+    prefix:       /api/user
+    resource:     "@SonataUserBundle/Resources/config/routing/api.xml"
+
+sonata_api_news:
+    type:         rest
+    prefix:       /api
+    resource:     "@SonataNewsBundle/Resources/config/routing/api.xml"
+
+sonata_api_page:
+    type:         rest
+    prefix:       /api/page
+    resource:     "@SonataPageBundle/Resources/config/routing/api.xml"
+
+sonata_api_media:
+    type:         rest
+    prefix:       /api
+    resource:     "@SonataMediaBundle/Resources/config/routing/api.xml"
+
+#sonata_api_ecommerce_product:
+#    type:         rest
+#    prefix:       /api/ecommerce
+#    resource:     "@SonataProductBundle/Resources/config/routing/api.xml"
+#
+#sonata_api_ecommerce_order:
+#    type:         rest
+#    prefix:       /api/ecommerce
+#    resource:     "@SonataOrderBundle/Resources/config/routing/api.xml"
+#
+#sonata_api_ecommerce_invoice:
+#    type:         rest
+#    prefix:       /api/ecommerce
+#    resource:     "@SonataInvoiceBundle/Resources/config/routing/api.xml"
+#
+#sonata_api_ecommerce_customer:
+#    type:         rest
+#    prefix:       /api/ecommerce
+#    resource:     "@SonataCustomerBundle/Resources/config/routing/api.xml"
+#
+#sonata_api_ecommerce_basket:
+#    type:         rest
+#    prefix:       /api/ecommerce
+#    resource:     "@SonataBasketBundle/Resources/config/routing/api.xml"
